@@ -1,6 +1,7 @@
 import sequelize from "../db/db-connection.js";
 import { DataTypes } from "sequelize";
 
+
 const Review = sequelize.define("review", {
   id: {
     primaryKey: true,

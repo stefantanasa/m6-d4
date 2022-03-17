@@ -12,15 +12,10 @@ categoryRouter.get("/", async (req, res, next) => {
     console.log("❤️", error);
   }
 });
-categoryRouter.post("/:categoryId", async (req, res, next) => {
+categoryRouter.post("/", async (req, res, next) => {
   try {
-    const toPost = {
-      ...req.body,
-      categoryId: req.params.categoryId,
-    };
-    // console.log(toPost);
-    const newCategory = Category.create(toPost);
-    res.status(200).send({ toPost });
+    const newCategory = Category.create(req.body);
+    res.status(200).send({ newCategory });
   } catch (error) {
     console.log("❤️", error);
   }

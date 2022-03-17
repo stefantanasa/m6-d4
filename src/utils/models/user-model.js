@@ -9,23 +9,23 @@ const User = sequelize.define("user", {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   lastName: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   age: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
   country: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
 });
 export default User;

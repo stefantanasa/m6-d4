@@ -1,8 +1,8 @@
 import sequelize from "../db/db-connection.js";
 import { DataTypes } from "sequelize";
 
-const Review = sequelize.define(
-  "review",
+const Category = sequelize.define(
+  "category",
   {
     id: {
       primaryKey: true,
@@ -10,7 +10,7 @@ const Review = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
     },
     name: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
@@ -18,4 +18,4 @@ const Review = sequelize.define(
     timestamps: false,
   }
 );
-export default Review;
+export default Category;

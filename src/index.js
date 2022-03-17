@@ -2,6 +2,8 @@ import express from "express";
 import { testDB, syncDB } from "./utils/db/db-connection.js";
 import productsRouters from "./services/products/index.js";
 import reviewsRouters from "./services/reviews/index.js";
+import usersRouters from "./services/user/index.js";
+import categoriesRouters from "./services/category/index.js";
 import cors from "cors";
 
 const server = express();
@@ -9,6 +11,8 @@ const server = express();
 server.use(express.json());
 server.use("/products", productsRouters);
 server.use("/reviews", reviewsRouters);
+server.use("/users", usersRouters);
+server.use("/categories", categoriesRouters);
 server.use(cors());
 const port = process.env.port;
 

@@ -12,22 +12,18 @@ userRouter.get("/", async (req, res, next) => {
     console.log("❤️", error);
   }
 });
-userRouter.post("/:userId", async (req, res, next) => {
+userRouter.post("/", async (req, res, next) => {
   try {
-    const toPost = {
-      ...req.body,
-      userId: req.params.userId,
-    };
     // console.log(toPost);
-    const newUser = User.create(toPost);
-    res.status(200).send({ toPost });
+    const newUser = User.create(req.body);
+    res.status(200).send({ newUser });
   } catch (error) {
     console.log("❤️", error);
   }
 });
 userRouter.get("/:userId", async (req, res, next) => {
   try {
-    const user = await user.findByPk(req.params.userId);
+    const user = await User.findByPk(req.params.userId);
 
     res.send(user);
   } catch (error) {
