@@ -19,8 +19,8 @@ reviewsRouter.post("/:productId", async (req, res, next) => {
       productId: req.params.productId,
     };
     // console.log(toPost);
-    const newReview = Review.create(toPost);
-    res.status(200).send({ toPost });
+    const newReview = await Review.create(toPost);
+    res.status(200).send({ newReview });
   } catch (error) {
     console.log("❤️", error);
   }

@@ -21,4 +21,12 @@ Product.belongsToMany(ShoppingCart, { through: ShoppingCartProducts });
 User.hasMany(Review);
 Review.belongsTo(User);
 
-export { Review, Product, Category, User, CategoryProduct, ShoppingCart };
+export {
+  Review,
+  Product,
+  Category,
+  User,
+  CategoryProduct,
+  ShoppingCart,
+  ShoppingCartProducts,
+};

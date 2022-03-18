@@ -69,8 +69,8 @@ shoppingCartRouter.post("/:productId", async (req, res, next) => {
       productId: req.params.productId,
     };
     // console.log(toPost);
-    const newReview = Review.create(toPost);
-    res.status(200).send({ toPost });
+    const newProduct = await ShoppingCart.create(toPost);
+    res.status(200).send({ newProduct });
   } catch (error) {
     console.log("❤️", error);
   }

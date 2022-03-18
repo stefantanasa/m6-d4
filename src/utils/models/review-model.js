@@ -1,7 +1,6 @@
 import sequelize from "../db/db-connection.js";
 import { DataTypes } from "sequelize";
 
-
 const Review = sequelize.define("review", {
   id: {
     primaryKey: true,
@@ -10,11 +9,11 @@ const Review = sequelize.define("review", {
   },
   text: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: true,
   },
   username: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
 });
 export default Review;

@@ -7,9 +7,5 @@ const ShoppingCart = sequelize.define("shoppingCart", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
-  product: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
 });
 export default ShoppingCart;
