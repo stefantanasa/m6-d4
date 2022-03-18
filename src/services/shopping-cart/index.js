@@ -6,19 +6,20 @@ import {
   CategoryProduct,
   Category,
   User,
+  ShoppingCart,
 } from "../../utils/models/relations.js";
 import { Op } from "sequelize";
 
-const productsRouter = express.Router();
+const shoppingCartRouter = express.Router();
 
-productsRouter.get("/", async (req, res, next) => {
+shoppingCartRouter.get("/", async (req, res, next) => {
   try {
     const areQueries = Object.keys(req.query);
 
     if (areQueries.length !== 0) {
       console.log("There are queries!");
 
-      const data = await Product.findAll({
+      const data = await ShoppingCart.findAll({
         where: {
           ...(req.query && {
             [Op.or]: [
@@ -42,7 +43,7 @@ productsRouter.get("/", async (req, res, next) => {
     } else {
       console.log("There are no queries!");
 
-      const data = await Product.findAll({
+      const data = await ShoppingCart.findAll({
         include: [
           {
             model: Review,
@@ -60,36 +61,23 @@ productsRouter.get("/", async (req, res, next) => {
     console.log("❤️", error);
   }
 });
-productsRouter.post("/", async (req, res, next) => {
+
+shoppingCartRouter.post("/:productId", async (req, res, next) => {
   try {
-    const { categoryId, ...rest } = req.body;
-
-    const mewProduct = await Product.create(rest);
-
-    const categoryProduct = await CategoryProduct.create({
-      productId: mewProduct.id,
-      categoryId: categoryId,
-    });
-    console.log("product send: ", mewProduct);
-    // const newProduct = Product.create(req.body);
-    res.status(200).send(categoryProduct);
+    const toPost = {
+      ...req.body,
+      productId: req.params.productId,
+    };
+    // console.log(toPost);
+    const newReview = Review.create(toPost);
+    res.status(200).send({ toPost });
   } catch (error) {
     console.log("❤️", error);
   }
 });
-productsRouter.get("/:productId", async (req, res, next) => {
+shoppingCartRouter.delete("/:productId", (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
-    console.log("id: ", req.params.productId);
-
-    res.send(product);
-  } catch (error) {
-    console.log("❤️", error);
-  }
-});
-productsRouter.delete("/:productId", (req, res, next) => {
-  try {
-    const deletedProduct = Product.destroy({
+    const deletedProduct = ShoppingCart.destroy({
       truncate: true,
       where: {
         id: req.params.id,
@@ -100,9 +88,9 @@ productsRouter.delete("/:productId", (req, res, next) => {
     console.log("❤️", error);
   }
 });
-productsRouter.put("/:productId", async (req, res, next) => {
+shoppingCartRouter.put("/:productId", async (req, res, next) => {
   try {
-    const updated = await Product.update(req.body, {
+    const updated = await ShoppingCart.update(req.body, {
       where: { id: req.params.productId },
     });
     res.status(200).send(updated);
@@ -111,4 +99,4 @@ productsRouter.put("/:productId", async (req, res, next) => {
   }
 });
 
-export default productsRouter;
+export default shoppingCartRouter;

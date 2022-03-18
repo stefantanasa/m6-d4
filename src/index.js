@@ -4,6 +4,7 @@ import productsRouters from "./services/products/index.js";
 import reviewsRouters from "./services/reviews/index.js";
 import usersRouters from "./services/user/index.js";
 import categoriesRouters from "./services/category/index.js";
+import shoppingCartRouters from "./services/shopping-cart/index.js";
 import cors from "cors";
 
 const server = express();
@@ -13,6 +14,7 @@ server.use("/products", productsRouters);
 server.use("/reviews", reviewsRouters);
 server.use("/users", usersRouters);
 server.use("/categories", categoriesRouters);
+server.use("/shoppingCart", shoppingCartRouters);
 server.use(cors());
 const port = process.env.port;
 
